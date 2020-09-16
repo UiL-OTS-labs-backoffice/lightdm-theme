@@ -3,19 +3,14 @@
   import Form from './Form.svelte'
   import Loading from './Loading.svelte'
   import PowerOptions from './PowerOptions.svelte'
-  import '../assets/background.jpg'
+  import background from '../assets/background.jpg'
 
   let isIdle = null
 
   onMount(() => {
-    const imgpath = './assets/background.jpg'
-    const img = new Image()
-    img.onload = () => {
-      const bg = document.querySelector('.background')
-      bg.src = img.src
-      bg.classList.add('imageReady')
-    }
-    img.src = imgpath
+    const body = document.querySelector('body')
+    body.style.setProperty("background-image", "url(" + background + ")")
+    body.classList.add('imageReady')
   })
 
   function toggleIdle() {
@@ -71,18 +66,10 @@
     height: 35px;
   }
   :global(.hide-error) {
-    height: 0px;
-  }
-  .background {
-    position: absolute;
-    width: 100%;
-    height: auto;
-    opacity: 0;
-    transition: opacity 300ms ease-in;
+    height: 0;
   }
 </style>
 
-<img class='background' alt='background' />
 <Form {isIdle} {toggleIdle} {logIn} />
 <Loading {isIdle} />
 <PowerOptions {isIdle} />
