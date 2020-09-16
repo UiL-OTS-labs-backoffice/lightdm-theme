@@ -6,10 +6,10 @@
   export let isIdle
 
   let userOptions = {
-    hibernate: lightdm.can_hibernate,
+    hibernate: false,
     restart: lightdm.can_restart,
     shutdown: lightdm.can_shutdown,
-    suspend: lightdm.can_suspend
+    suspend: false
   }
 
   function executeAction(option) {
@@ -19,19 +19,20 @@
 
 <style>
   div {
+    background: white;
     display: flex;
-    color: var(--c3);
-    font-family: monospace;
+    color: black;
+    font-family: Arial, Helvetica, sans-serif;
     position: absolute;
-    top: 0;
-    right: 0;
-    padding: 20px 20px 0 0;
+    top: 10px;
+    right: 10px;
+    padding: 15px;
     user-select: none;
+    border-radius: 8px;
     z-index: 100;
   }
   .action {
     cursor: pointer;
-    opacity: 0.5;
     transition: all 300ms ease-in-out;
   }
   .action:hover {

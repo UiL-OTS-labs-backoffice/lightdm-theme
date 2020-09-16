@@ -1,6 +1,6 @@
 [theme]
-name=enkel
-description=yeah...
+name=uilots
+description=UiL OTS Login Theme
 engine=lightdm-webkit2-greeter
 url=index.html
-session=gnome
+session=mate

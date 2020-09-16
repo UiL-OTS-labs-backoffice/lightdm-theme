@@ -1,24 +1,18 @@
-```
-
-                                                                    e n k e l
+UiL OTS LightDM Theme
 
 
-A theme for lightdm-webkit2-greeter
-```
-
-![preview](preview.png)
 
 ## Installation
 
 ```
 1. download latest release in project's `download` folder
-2. copy uncompressed `enkel` folder to /usr/share/lightdm-webkit/themes/
-3. update `webkit_theme` option in /etc/lightdm/lightdm-webkit2-greeter to `enkel`
+2. copy uncompressed `lightdm-theme` folder contents to /usr/share/lightdm-webkit/themes/uilots
+3. update `webkit_theme` option in /etc/lightdm/lightdm-webkit2-greeter to `uilots`
 ```
 
 ## Change background image
 
-location: `enkel/assets/background.jpg`
+location: `assets/background.jpg`
 
 ## Development
 
@@ -30,7 +24,13 @@ Recommended to use `yarn` over `npm`
 
 ## License
 
-This software is distributed under MIT license:
+This software is distributed under the MIT license, with the exception of any Utrecht University trademarks.
+
+Consider using [enkel](https://github.com/vndre/enkel-greeter), the project this theme is based upon. (See below)
+
+
+## Credits
+Forked from [``enkel`` by Andre Aldana](https://github.com/vndre/enkel-greeter)
 
 ```
 MIT License
@@ -55,6 +55,3 @@ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 ```
-
-## Credits
-- Background photo by [Bora Burri](https://unsplash.com/@borapic)

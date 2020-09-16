@@ -71,7 +71,7 @@
 
 <style>
   ::placeholder {
-    color: var(--c4);
+    color: #666;
   }
   .container {
     background: var(--c3);
@@ -88,7 +88,7 @@
     z-index: 100;
   }
   h1 {
-    color: white;
+    color: black;
     letter-spacing: 2px;
     margin: 0 0 20px 0;
   }
@@ -97,7 +97,7 @@
     border: none;
     outline: none;
     font-size: 1em;
-    color: white;
+    color: black;
     padding: 8px;
     width: 100%;
     z-index: 100;
@@ -120,17 +120,11 @@
     bottom: 0;
     left: 0;
     background: var(--c1);
-    background: linear-gradient(45deg, var(--c1) 0%, var(--c2) 100%);
-    transition: all 300ms cubic-bezier(0.785, 0.135, 0.15, 0.86);
     z-index: 1;
-  }
-  .form-group > input:focus + span {
-    top: 0;
   }
   .error-group {
     text-align: center;
-    color: #74F8F8;
-    font-style: italic;
+    color: red;
     position: relative;
     overflow: hidden;
     transition: all 300ms ease-in-out;
@@ -142,23 +136,21 @@
     right: 0;
   }
   button {
-    border-radius: 50%;
     background: var(--c1);
     background: linear-gradient(45deg, var(--c1) 0%, var(--c2) 100%);
     border: none;
-    width: 40px;
+    width: auto;
+    font-weight: bold;
     height: 40px;
-    box-shadow: 0 10px 20px rgba(175, 102, 254, 0.19),
-      0 6px 6px rgba(175, 102, 254, 0.23);
     cursor: pointer;
     padding: 10px;
     margin-left: auto;
-    color: white;
+    color: black;
     transition: all 300ms cubic-bezier(0.39, 0.575, 0.565, 1);
   }
   button:hover, button:focus {
-    box-shadow: 0 3px 6px rgba(175, 102, 254, 0.16),
-      0 3px 6px rgba(175, 102, 254, 0.23);
+    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16),
+      0 3px 6px rgba(0, 0, 0, 0.23);
   }
   .bottom {
     display: flex;
@@ -200,7 +192,9 @@
     in:fly={{ y: 40, easing: quadInOut }}
     out:fade
   >
-    <h1>{lightdm.hostname || `welcome`}</h1>
+    <h1>Welcome</h1>
+    <p>Please login using your UU email-address and password</p>
+    <br/>
     <form
       on:submit|preventDefault={handleLogin}
       autocomplete='off'
@@ -209,7 +203,7 @@
         <input
           id='user-name'
           type=text
-          placeholder='username'
+          placeholder='j.doe@uu.nl'
           on:focus={clearError}
         />
         <span />
@@ -242,7 +236,7 @@
           </select>
         </div>
         <button id='login-btn'>
-          <img src={rightArrowSVG} alt='login' />
+          Log in
         </button>
       </div>
     </form>
