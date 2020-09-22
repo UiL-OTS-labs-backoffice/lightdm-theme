@@ -28,6 +28,8 @@
     --c2: #FFCD00;
     --c3: #fff;
     --c4: #000;
+    --shadow-l: 0 0px 5px rgba(4, 3, 15, 0.25),
+      0 5px 5px rgba(4, 3, 15, 0.22);
     --shadow: 0 14px 28px rgba(4, 3, 15, 0.25),
       0 10px 10px rgba(4, 3, 15, 0.22);
     --shadow-h: 0 19px 38px rgba(4, 3, 15, 0.30),

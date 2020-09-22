@@ -24,11 +24,12 @@
     color: black;
     font-family: Arial, Helvetica, sans-serif;
     position: absolute;
-    top: 10px;
-    right: 10px;
+    top: 0px;
+    right: 0px;
     padding: 15px;
     user-select: none;
-    border-radius: 8px;
+    border-bottom-left-radius: 8px;
+    box-shadow: var(--shadow-l);
     z-index: 100;
   }
   .action {

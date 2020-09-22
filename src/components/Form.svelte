@@ -80,7 +80,7 @@
     min-width: 300px;
     max-height: 500px;
     margin: 50px;
-    padding: 40px;
+    padding: 30px 20px 20px 20px;
     border-radius: 8px;
     box-shadow: var(--shadow);
     transition: all 300ms cubic-bezier(0.455, 0.03, 0.515, 0.955);
@@ -143,14 +143,10 @@
     font-weight: bold;
     height: 40px;
     cursor: pointer;
-    padding: 10px;
+    padding: 15px 20px;
     margin-left: auto;
     color: black;
     transition: all 300ms cubic-bezier(0.39, 0.575, 0.565, 1);
-  }
-  button:hover, button:focus {
-    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16),
-      0 3px 6px rgba(0, 0, 0, 0.23);
   }
   .bottom {
     display: flex;
@@ -158,23 +154,24 @@
   }
   .session {
     display: flex;
+    padding: 10px 0;
     align-items: flex-end;
   }
   .session > span {
     color: var(--c4);
-    margin-right: 2px;
+    margin-right: 5px;
   }
   .session-list {
     color: var(--c4);
     box-sizing: border-box;
     margin: 0;
-    padding-left: 15px;
+    padding-right: 15px;
     border: none;
     -webkit-appearance: none;
     background-color: transparent;
     background-image: url('../assets/icons/dropdown-arrow.svg');
     background-repeat: no-repeat;
-    background-position: left;
+    background-position: right;
     background-size: contain;
     cursor: pointer;
   }
