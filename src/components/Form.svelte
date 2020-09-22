@@ -143,7 +143,7 @@
     font-weight: bold;
     height: 40px;
     cursor: pointer;
-    padding: 15px 20px;
+    padding: 10px 20px;
     margin-left: auto;
     color: black;
     transition: all 300ms cubic-bezier(0.39, 0.575, 0.565, 1);
