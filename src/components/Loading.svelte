@@ -15,6 +15,9 @@
     flex-direction: column;
     align-items: center;
     z-index: 100;
+    background: rgba(0,0,0,0.5);
+    padding: 30px;
+    border-radius: 8px;
   }
   .loader img {
     width: 75px;
@@ -23,6 +26,7 @@
     font-size: 1.6em;
     font-style: italic;
     color: var(--c3);
+    margin-top: 15px;
   }
 </style>
 

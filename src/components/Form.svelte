@@ -202,7 +202,6 @@
           type=text
           placeholder='j.doe@uu.nl'
           autofocus='autofocus'
-          on:focus={clearError}
         />
         <span />
       </div>
