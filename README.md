@@ -16,7 +16,7 @@ location: `assets/background.jpg`
 
 ## Development
 
-Recommended to use `yarn` over `npm`
+Recommended to use `yarn` over `npm` (`yarnpkg` on Ubuntu)
 
 - `yarn` to install dependencies
 - `yarn dev` runs webpack-dev-server

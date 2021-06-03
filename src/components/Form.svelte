@@ -9,6 +9,9 @@
   export let logIn
   let error
   let selectedSession
+  let retries = 0
+  let user
+  let secret
 
   const lightdm = window.lightdm || {}
 
@@ -33,8 +36,13 @@
 
   function handleLogin() {
     document.querySelector('#login-btn').blur()
-    const { value: user } = document.querySelector('#user-name')
-    const { value: secret } = document.querySelector('#user-secret')
+
+    // No uu.nl at the end? Assume it's a Solis-ID and append @soliscom.uu.nl
+    user = document.querySelector('#user-name').value
+    if (!user.endsWith('uu.nl'))
+      user = user + "@soliscom.uu.nl"
+
+    secret = document.querySelector('#user-secret').value
     
     if (!user || !secret) {
       if (!user && !secret) error = 'missing username and password'
@@ -47,7 +55,6 @@
   }
 
   window.show_prompt = (text, type) => {
-    const { value: secret } = document.querySelector('#user-secret')
     if (type === 'password') {
       lightdm.respond(secret)
     }
@@ -55,12 +62,31 @@
 
   window.authentication_complete = () => {
       if (lightdm.is_authenticated) {
+        secret = ""
+        retries = 0
         lightdm.login(lightdm.authentication_user, selectedSession.name.toLowerCase())
         logIn()
       }
+      else if (retries === 0) {
+        // Ensure we don't fall into this if again
+        retries = 1
+
+        // Try to authenticate sans soliscom, it could be a local user
+        user = user.replace('@soliscom.uu.nl', '')
+        lightdm.authenticate(user)
+      }
       else {
+        // Reset
+        secret = ""
+        retries = 0
         toggleIdle()
+
+        // Show errors
         error = 'Invalid username/password'
+
+        // Restore username field
+        document.querySelector('#user-name').value = user
+        user = ""
       }
   }
 
@@ -190,7 +216,7 @@
     out:fade
   >
     <h1>Welcome</h1>
-    <p>Please login using your UU email-address and password</p>
+    <p>Please login using your Solis-ID and password</p>
     <br/>
     <form
       on:submit|preventDefault={handleLogin}
@@ -200,7 +226,7 @@
         <input
           id='user-name'
           type=text
-          placeholder='j.doe@uu.nl'
+          placeholder='Solis-ID'
           autofocus='autofocus'
         />
         <span />
@@ -209,7 +235,7 @@
         <input
           id='user-secret'
           type=password
-          placeholder='password'
+          placeholder='Password'
           on:focus={clearError}
         />
         <span />
