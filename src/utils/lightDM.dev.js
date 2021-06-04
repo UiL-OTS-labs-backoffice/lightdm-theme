@@ -8,28 +8,28 @@ window.lightdm = {
   can_restart: true,
   can_shutdown: true,
   can_suspend: true,
-  hostname: 'Arch',
+  hostname: 'GW-LAB-LOGIN-DEMO',
   sessions: [
     {
-        name: 'KDE 5',
-        key: 'plasma-shell'
+        name: 'MATE',
+        key: 'mate-shell'
     },
-    {
-        name: 'Gnome 3',
-        key: 'gnome-shell'
-    },
-    {
-        name: 'XFCE 4',
-        key: 'xfce'
-    },
-    {
-        name: 'Cinnamon',
-        key: 'cinnamon'
-    },
-    {
-        name: 'i3wm',
-        key: 'i3'
-    }
+    // {
+    //     name: 'Gnome 3',
+    //     key: 'gnome-shell'
+    // },
+    // {
+    //     name: 'XFCE 4',
+    //     key: 'xfce'
+    // },
+    // {
+    //     name: 'Cinnamon',
+    //     key: 'cinnamon'
+    // },
+    // {
+    //     name: 'i3wm',
+    //     key: 'i3'
+    // }
   ],
   users: [
     {

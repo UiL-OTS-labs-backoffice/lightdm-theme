@@ -37,9 +37,9 @@
     const { value: secret } = document.querySelector('#user-secret')
 
     if (!username || !secret) {
-      if (!username && !secret) error = 'missing username and password'
-      else if (!user) error = 'missing username'
-      else error = 'missing password'
+      if (!username && !secret) error = 'Missing username and password'
+      else if (!username) error = 'Missing username'
+      else error = 'Missing password'
       return
     }
     lightdm.authenticate(username)
@@ -80,25 +80,30 @@
     min-width: 300px;
     max-height: 500px;
     margin: 50px;
-    padding: 30px 20px 20px 20px;
-    border-radius: 8px;
+    padding: 20px 30px 30px;
+    border-radius: 4px;
     box-shadow: var(--shadow);
     transition: all 300ms cubic-bezier(0.455, 0.03, 0.515, 0.955);
     user-select: none;
     z-index: 100;
   }
   h1 {
-    color: black;
+    color: var(--c5);
     letter-spacing: 2px;
     margin: 0 0 20px 0;
+  }
+  p {
+    margin-bottom: 20px;
+    color: var(--c7)
   }
   input {
     background-color: transparent;
     border: none;
     outline: none;
     font-size: 1em;
-    color: black;
-    padding: 8px;
+    font-weight: 400;
+    color: var(--c5);
+    padding: 10px 15px;
     width: 100%;
     z-index: 100;
     position: relative;
@@ -112,6 +117,15 @@
     position: relative;
     margin-bottom: 20px;
   }
+  .form-group > input[type=text],
+  .form-group > input[type=password] {
+    border: 1px solid var(--c6);
+    transition: all 300ms cubic-bezier(0.455, 0.03, 0.515, 0.955);
+  }
+  .form-group > input[type=text]:focus,
+  .form-group > input[type=password]:focus {
+    border: 1px solid var(--c1);
+  }
   .form-group > span {
     position: absolute;
     width: 100%;
@@ -120,6 +134,7 @@
     bottom: 0;
     left: 0;
     background: var(--c1);
+    background: transparent;
     z-index: 1;
   }
   .error-group {
@@ -130,39 +145,40 @@
     transition: all 300ms ease-in-out;
   }
   .error-group p {
-    margin: 10px 0;
+    margin: 0 0 10px 0;
     position: absolute;
     left: 0;
     right: 0;
   }
   button {
     background: var(--c1);
-    background: linear-gradient(45deg, var(--c1) 0%, var(--c2) 100%);
     border: none;
     width: auto;
-    font-weight: bold;
+    flex: 1 1 auto;
+    font-weight: 700;
+    letter-spacing: 0;
     height: 40px;
     cursor: pointer;
-    padding: 10px 20px;
-    margin-left: auto;
+    padding: 0 20px;
     color: black;
     transition: all 300ms cubic-bezier(0.39, 0.575, 0.565, 1);
   }
   .bottom {
     display: flex;
-    margin-top: 20px;
+    justify-content: center;
   }
   .session {
     display: flex;
     padding: 10px 0;
     align-items: flex-end;
+    flex: 1 0 auto;
   }
   .session > span {
-    color: var(--c4);
+    color: var(--c7);
     margin-right: 5px;
   }
   .session-list {
-    color: var(--c4);
+    color: var(--c7);
     box-sizing: border-box;
     margin: 0;
     padding-right: 15px;
@@ -191,11 +207,16 @@
   >
     <h1>Welcome</h1>
     <p>Please login using your Solis-ID and password</p>
-    <br/>
     <form
       on:submit|preventDefault={handleLogin}
       autocomplete='off'
     >
+      <div
+              id='error-message'
+              class="error-group {error ? 'show-error' : 'hide-error'}"
+      >
+        <p>{error || ''}</p>
+      </div>
       <div class='form-group'>
         <input
           id='user-name'
@@ -204,7 +225,6 @@
           autofocus='autofocus'
           bind:value={username}
         />
-        <span />
       </div>
       <div class='form-group'>
         <input
@@ -213,26 +233,21 @@
           placeholder='Password'
           on:focus={clearError}
         />
-        <span />
-      </div>
-      <div
-        id='error-message'
-        class="error-group {error ? 'show-error' : 'hide-error'}"
-      >
-        <p>{error || ''}</p>
       </div>
       <div class='bottom'>
-        <div class='session'>
-          <span>session:</span>
-          <select
-            class='session-list'
-            bind:value={selectedSession}
-          >
-            {#each lightdm.sessions as session}
-              <option value={session}>{session.name}</option>
-            {/each}
-          </select>
-        </div>
+        {#if lightdm.sessions.length > 1}
+          <div class='session'>
+            <span>session:</span>
+            <select
+              class='session-list'
+              bind:value={selectedSession}
+            >
+              {#each lightdm.sessions as session}
+                <option value={session}>{session.name}</option>
+              {/each}
+            </select>
+          </div>
+        {/if}
         <button id='login-btn'>
           Log in
         </button>

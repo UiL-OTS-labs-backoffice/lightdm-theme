@@ -1,6 +1,5 @@
 <script>
-  import { fly, fade } from 'svelte/transition'
-  import { quadInOut } from 'svelte/easing'
+  import { fade } from 'svelte/transition'
   import Clock from './Clock.svelte'
 
   export let isIdle
@@ -21,14 +20,14 @@
   div {
     background: white;
     display: flex;
-    color: black;
+    color: var(--c5);
     font-family: Arial, Helvetica, sans-serif;
     position: absolute;
     top: 0px;
     right: 0px;
     padding: 15px;
     user-select: none;
-    border-bottom-left-radius: 8px;
+    border-bottom-left-radius: 4px;
     box-shadow: var(--shadow-l);
     z-index: 100;
   }
@@ -46,7 +45,7 @@
 
 {#if isIdle}
   <div
-    in:fly={{ delay: 200, y: 20, easing: quadInOut }}
+    in:fade
     out:fade
   >
     {#each Object.keys(userOptions) as option, index}

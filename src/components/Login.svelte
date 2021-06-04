@@ -28,6 +28,9 @@
     --c2: #FFCD00;
     --c3: #fff;
     --c4: #000;
+    --c5: #333;
+    --c6: #eee;
+    --c7: #505050;
     --shadow-l: 0 0px 5px rgba(4, 3, 15, 0.25),
       0 5px 5px rgba(4, 3, 15, 0.22);
     --shadow: 0 14px 28px rgba(4, 3, 15, 0.25),
@@ -41,7 +44,7 @@
   :global(html, body) {
     margin: 0;
     padding: 0;
-    font-family: Arial, Helvetica, sans-serif;
+    font-family: "Open Sans", Arial, Helvetica, sans-serif;
     font-size: 14px;
     overflow: hidden;
     transition: opacity 300ms ease-out;
@@ -60,10 +63,10 @@
   :global(.error-show) {
     height: 35px;
   }
-  :global(.logged-in) {
-    background: black !important;
-    opacity: 0;
-  }
+  /*:global(.logged-in) {*/
+  /*  background: black !important;*/
+  /*  opacity: 0;*/
+  /*}*/
   :global(.show-error) {
     height: 35px;
   }
