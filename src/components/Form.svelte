@@ -16,8 +16,10 @@
   onMount(() => {
     toggleIdle()
     if (lightdm.default_session !== 'default') {
-      lightdm.sessions.find(s => s.name === lightdm.default_session)
-    } else {
+      selectedSession = lightdm.sessions.find(s => s.name === lightdm.default_session)
+    }
+
+    if (typeof selectedSession === "undefined") {
       selectedSession = lightdm.sessions[0]
     }
   })
@@ -147,6 +149,7 @@
   .error-group p {
     margin: 0 0 10px 0;
     position: absolute;
+    color: red;
     left: 0;
     right: 0;
   }
