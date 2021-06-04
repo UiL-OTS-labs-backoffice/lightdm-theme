@@ -17,7 +17,7 @@
     z-index: 100;
     background: rgba(0,0,0,0.5);
     padding: 30px;
-    border-radius: 8px;
+    border-radius: 4px;
   }
   .loader img {
     width: 75px;
