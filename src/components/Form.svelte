@@ -9,9 +9,7 @@
   export let logIn
   let error
   let selectedSession
-  let retries = 0
-  let user
-  let secret
+  let username = ""
 
   const lightdm = window.lightdm || {}
 
@@ -36,58 +34,34 @@
 
   function handleLogin() {
     document.querySelector('#login-btn').blur()
+    const { value: secret } = document.querySelector('#user-secret')
 
-    // No uu.nl at the end? Assume it's a Solis-ID and append @soliscom.uu.nl
-    user = document.querySelector('#user-name').value
-    if (!user.endsWith('uu.nl'))
-      user = user + "@soliscom.uu.nl"
-
-    secret = document.querySelector('#user-secret').value
-    
-    if (!user || !secret) {
-      if (!user && !secret) error = 'missing username and password'
+    if (!username || !secret) {
+      if (!username && !secret) error = 'missing username and password'
       else if (!user) error = 'missing username'
       else error = 'missing password'
       return
     }
-    lightdm.authenticate(user)
+    lightdm.authenticate(username)
     toggleIdle()
   }
 
   window.show_prompt = (text, type) => {
+    const { value: secret } = document.querySelector('#user-secret')
     if (type === 'password') {
       lightdm.respond(secret)
     }
   }
 
   window.authentication_complete = () => {
-      if (lightdm.is_authenticated) {
-        secret = ""
-        retries = 0
-        lightdm.login(lightdm.authentication_user, selectedSession.name.toLowerCase())
-        logIn()
-      }
-      else if (retries === 0) {
-        // Ensure we don't fall into this if again
-        retries = 1
-
-        // Try to authenticate sans soliscom, it could be a local user
-        user = user.replace('@soliscom.uu.nl', '')
-        lightdm.authenticate(user)
-      }
-      else {
-        // Reset
-        secret = ""
-        retries = 0
-        toggleIdle()
-
-        // Show errors
-        error = 'Invalid username/password'
-
-        // Restore username field
-        document.querySelector('#user-name').value = user
-        user = ""
-      }
+    if (lightdm.is_authenticated) {
+      lightdm.login(lightdm.authentication_user, selectedSession.name.toLowerCase())
+      logIn()
+    }
+    else {
+      toggleIdle()
+      error = 'Invalid username/password'
+    }
   }
 
   window.show_message = (text) => {
@@ -228,6 +202,7 @@
           type=text
           placeholder='Solis-ID'
           autofocus='autofocus'
+          bind:value={username}
         />
         <span />
       </div>
