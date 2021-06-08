@@ -10,6 +10,8 @@
   let error
   let selectedSession
   let username = ""
+  let secret = ""
+  let retries = 0
 
   const lightdm = window.lightdm || {}
 
@@ -36,7 +38,6 @@
 
   function handleLogin() {
     document.querySelector('#login-btn').blur()
-    const { value: secret } = document.querySelector('#user-secret')
 
     if (!username || !secret) {
       if (!username && !secret) error = 'Missing username and password'
@@ -44,12 +45,16 @@
       else error = 'Missing password'
       return
     }
-    lightdm.authenticate(username)
+
+    if(!username.endsWith('uu.nl'))
+      lightdm.authenticate(username + "@soliscom.uu.nl")
+    else
+      lightdm.authenticate(username)
+
     toggleIdle()
   }
 
   window.show_prompt = (text, type) => {
-    const { value: secret } = document.querySelector('#user-secret')
     if (type === 'password') {
       lightdm.respond(secret)
     }
@@ -60,7 +65,13 @@
       lightdm.login(lightdm.authentication_user, selectedSession.name.toLowerCase())
       logIn()
     }
+    else if (retries === 0) {
+      retries = 1
+      lightdm.authenticate(username)
+    }
     else {
+      secret = ""
+      retries = 0
       toggleIdle()
       error = 'Invalid username/password'
     }
@@ -235,6 +246,7 @@
           type=password
           placeholder='Password'
           on:focus={clearError}
+          bind:value={secret}
         />
       </div>
       <div class='bottom'>

@@ -33,6 +33,10 @@ window.lightdm = {
   ],
   users: [
     {
+      display_name: "Solis Example",
+      username: "solis001@soliscom.uu.nl"
+    },
+    {
       display_name: 'Any Rita',
       username: 'annri'
     },
@@ -53,9 +57,21 @@ window.lightdm = {
   ],
   language: 'American English',
   authenticate: (username) => {
-    debugMessage(`lightdm.authenticate('${username}')`)
-    lightdm.authentication_user = username
-    show_prompt('Password: ', 'password')
+    let found = false;
+    for(const user of lightdm.users) {
+      if (username === user.username) {
+        found = true;
+        break;
+      }
+    }
+    if(found) {
+      debugMessage(`lightdm.authenticate('${username}')`)
+      lightdm.authentication_user = username
+      show_prompt('Password: ', 'password')
+    }
+    else {
+      setTimeout(() => authentication_complete(), 2000)
+    }
   },
   cancel_authentication: () => {
     debugMessage('lightdm.cancel_authentication()')
