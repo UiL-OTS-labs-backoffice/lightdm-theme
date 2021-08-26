@@ -72,6 +72,10 @@
 </script>
 
 <style>
+  @font-face {
+    font-family: "MerriweatherBold";
+    src: url("../assets/fonts/Merriweather-Bold.ttf") format("truetype");
+  }
   ::placeholder {
     color: #666;
   }
@@ -83,7 +87,7 @@
     max-height: 500px;
     margin: 50px;
     padding: 20px 30px 30px;
-    border-radius: 4px;
+    /*border-radius: 4px;*/
     box-shadow: var(--shadow);
     transition: all 300ms cubic-bezier(0.455, 0.03, 0.515, 0.955);
     user-select: none;
@@ -93,6 +97,8 @@
     color: var(--c5);
     letter-spacing: 2px;
     margin: 0 0 20px 0;
+    font-family: "MerriweatherBold", "Times New Roman", "Open Sans", serif;
+    font-weight: bold;
   }
   p {
     margin-bottom: 20px;

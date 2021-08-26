@@ -49,7 +49,7 @@ module.exports = {
         }
       },
       {
-        test: /\.(woff(2)?|jpg)?$/,
+        test: /\.(woff(2)?|ttf|jpg)?$/,
         use: {
           loader: 'file-loader',
           options: {
@@ -90,7 +90,7 @@ module.exports = {
             emitCss: true
           }
         }
-      }
+      },
     ]
   }
 };

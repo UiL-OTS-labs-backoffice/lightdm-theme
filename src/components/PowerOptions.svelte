@@ -27,7 +27,7 @@
     right: 0px;
     padding: 15px;
     user-select: none;
-    border-bottom-left-radius: 4px;
+    /*border-bottom-left-radius: 4px;*/
     box-shadow: var(--shadow-l);
     z-index: 100;
   }
