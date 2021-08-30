@@ -9,6 +9,10 @@
 </script>
 
 <style>
+  @font-face {
+    font-family: "MerriweatherBold";
+    src: url("../assets/fonts/Merriweather-Bold.ttf") format("truetype");
+  }
   .loader {
     position: absolute;
     display: flex;
@@ -17,16 +21,15 @@
     z-index: 100;
     background: rgba(0,0,0,0.5);
     padding: 30px;
-    border-radius: 4px;
   }
   .loader img {
     width: 75px;
   }
   .loader span {
     font-size: 1.6em;
-    font-style: italic;
+    font-family: "MerriweatherBold", "Times New Roman", "Open Sans", serif;
     color: var(--c3);
-    margin-top: 15px;
+    margin-top: 30px;
   }
 </style>
 
