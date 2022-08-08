@@ -47,27 +47,26 @@
     }
 
     if(!username.endsWith('uu.nl'))
-      lightdm.authenticate(username + "@soliscom.uu.nl")
+      authenticate(username + "@soliscom.uu.nl")
     else
-      lightdm.authenticate(username)
+      authenticate(username)
 
     toggleIdle()
   }
 
-  window.show_prompt = (text, type) => {
-    if (type === 'password') {
-      lightdm.respond(secret)
-    }
+  function authenticate(username) {
+    lightdm.authenticate(username);
+    setTimeout(() => {lightdm.respond(secret)}, 1000)
   }
 
-  window.authentication_complete = () => {
+  lightdm.authentication_complete.connect(() => {
     if (lightdm.is_authenticated) {
-      lightdm.login(lightdm.authentication_user, selectedSession.name.toLowerCase())
+      lightdm.start_session(selectedSession.name.toLowerCase())
       logIn()
     }
     else if (retries === 0) {
       retries = 1
-      lightdm.authenticate(username)
+      authenticate(username)
     }
     else {
       secret = ""
@@ -75,9 +74,9 @@
       toggleIdle()
       error = 'Invalid username/password'
     }
-  }
+  })
 
-  window.show_message = (text) => {
+  lightdm.show_message = (text) => {
     error = text
   }
 </script>
