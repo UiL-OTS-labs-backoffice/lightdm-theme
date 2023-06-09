@@ -19,7 +19,7 @@ module.exports = {
     }),
     new CopyPlugin([
       {
-        from: path.resolve(__dirname, 'src/index.theme'),
+        from: path.resolve(__dirname, 'src/index.yml'),
         to: path.resolve(__dirname, 'dist'),
         toType: 'dir'
       }

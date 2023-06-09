@@ -37,47 +37,55 @@
   }
 
   function handleLogin() {
+    console.log("Starting authentication")
     document.querySelector('#login-btn').blur()
 
     if (!username || !secret) {
       if (!username && !secret) error = 'Missing username and password'
       else if (!username) error = 'Missing username'
       else error = 'Missing password'
+      console.log("Validation error, cancelling")
       return
     }
 
     if(!username.endsWith('uu.nl'))
-      lightdm.authenticate(username + "@soliscom.uu.nl")
+      authenticate(username + "@soliscom.uu.nl")
     else
-      lightdm.authenticate(username)
+      authenticate(username)
 
     toggleIdle()
   }
 
-  window.show_prompt = (text, type) => {
-    if (type === 'password') {
-      lightdm.respond(secret)
-    }
+  function authenticate(username) {
+    console.log('Authenticating', username);
+    lightdm.authenticate(username);
+    setTimeout(() => {console.log('Responding password');lightdm.respond(secret)}, 1000)
   }
 
-  window.authentication_complete = () => {
+  lightdm.authentication_complete.connect(() => {
+    console.log("Authentication complete")
+    console.log("is_authenticated", lightdm.is_authenticated)
     if (lightdm.is_authenticated) {
-      lightdm.login(lightdm.authentication_user, selectedSession.name.toLowerCase())
+      console.log("Starting session")
+      lightdm.start_session(selectedSession.name.toLowerCase())
       logIn()
     }
     else if (retries === 0) {
+      console.log("Retrying sans @soliscom.uu.nl")
       retries = 1
-      lightdm.authenticate(username)
+      authenticate(username)
     }
     else {
+      console.log("Giving up, going back to login screen")
       secret = ""
       retries = 0
       toggleIdle()
       error = 'Invalid username/password'
     }
-  }
+  })
 
-  window.show_message = (text) => {
+  lightdm.show_message = (text) => {
+    console.error(text)
     error = text
   }
 </script>
