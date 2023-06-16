@@ -6,6 +6,7 @@
 
   export let isIdle
   export let toggleIdle
+  export let setIdle
   export let logIn
   let error
   let selectedSession
@@ -16,7 +17,7 @@
   const lightdm = window.lightdm || {}
 
   onMount(() => {
-    toggleIdle()
+    setIdle(true)
     if (lightdm.default_session !== 'default') {
       selectedSession = lightdm.sessions.find(s => s.name === lightdm.default_session)
     }
@@ -53,7 +54,7 @@
     else
       authenticate(username)
 
-    toggleIdle()
+    setIdle(false)
   }
 
   function authenticate(username) {
@@ -79,7 +80,7 @@
       console.log("Giving up, going back to login screen")
       secret = ""
       retries = 0
-      toggleIdle()
+      setIdle(true)
       error = 'Invalid username/password'
     }
   })

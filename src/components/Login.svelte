@@ -16,6 +16,9 @@
   function toggleIdle() {
     isIdle = !isIdle
   }
+  function setIdle(val) {
+    isIdle = val
+  }
 
   function logIn() {
     document.querySelector('body').classList.add('logged-in')
@@ -75,6 +78,6 @@
   }
 </style>
 
-<Form {isIdle} {toggleIdle} {logIn} />
+<Form {isIdle} {toggleIdle} {setIdle} {logIn} />
 <Loading {isIdle} />
 <PowerOptions {isIdle} />
