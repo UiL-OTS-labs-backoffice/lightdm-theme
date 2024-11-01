@@ -68,7 +68,7 @@
     console.log("is_authenticated", lightdm.is_authenticated)
     if (lightdm.is_authenticated) {
       console.log("Starting session")
-      lightdm.start_session(selectedSession.name.toLowerCase())
+      lightdm.start_session(selectedSession.key)
       logIn()
     }
     else if (retries === 0) {
