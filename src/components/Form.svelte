@@ -85,10 +85,11 @@
     }
   })
 
-  lightdm.show_message = (text) => {
+  lightdm.show_message.connect((text) => {
     console.error(text)
+    setIdle(true)
     error = text
-  }
+  });
 </script>
 
 <style>
